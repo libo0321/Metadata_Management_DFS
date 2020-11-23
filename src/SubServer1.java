@@ -31,14 +31,12 @@ public class SubServer1 {
                     case "mkdir":
                         Folder folder = new Folder(cmd[1]);
                         datas.put(Integer.parseInt(cmd[1]),folder);
-                        message = "Id : " + cmd[1] + " created";
                         System.out.println(message);
                         break;
 
                     case "touch":
                         File file = new File(cmd[1]);
                         datas.put(Integer.parseInt(cmd[1]),file);
-                        message = "Id : " + cmd[1] + " created";
                         System.out.println(message);
                         break;
 
@@ -46,14 +44,12 @@ public class SubServer1 {
                     case "rmdir":
                     case "rm":
                         datas.remove(Integer.parseInt(cmd[1]));
-                        message = "Id : "+cmd[1]+ " removed";
                         System.out.println(message);
                         break;
 
                     case "chmod":
                         File item1 = (File) datas.get(Integer.parseInt(cmd[1]));
                         item1.chmod(cmd[2]);
-                        message = "Id : "+cmd[1]+ " changed mode";
                         System.out.println(message);
                         break;
 

@@ -94,13 +94,17 @@ public class Server {
                         else
                             if(tree.has_directory(current_directory, cmd[1])) {
                                 String abs_path = current_directory + cmd[1] + "/";
-                                int item_id = tree.getIdByPath(abs_path);
-                                int server_id = (item_id-1) % 3;
+                                if (tree.is_parent_directory(abs_path))
+                                    message = "Directory not empty";
+                                else{
+                                    int item_id = tree.getIdByPath(abs_path);
+                                    int server_id = (item_id-1) % 3;
 
-                                String cmd_reconstructed = cmd[0] + " " + item_id;
-                                outs[server_id].println(cmd_reconstructed);
-                                tree.rm_dir(current_directory, cmd[1]);
-                                message = "Directory removed";
+                                    String cmd_reconstructed = cmd[0] + " " + item_id;
+                                    outs[server_id].println(cmd_reconstructed);
+                                    tree.rm_dir(current_directory, cmd[1]);
+                                    message = "Directory removed";
+                                }
                             }
                             else
                                 message = "Directory doesn't exist";
@@ -142,13 +146,19 @@ public class Server {
                         break;
 
                     case "tree":
-                        message = cmd[0];
-                        System.out.println(cmd[0]);
+                        if (cmd.length != 1)
+                            message = "No variable expected, got "+(cmd.length-1)+" variables";
+                        else
+                            message = tree.tree(current_directory, 0);
+                        System.out.println(message);
                         break;
 
                     case "fulltree":
-                        message = cmd[0];
-                        System.out.println(cmd[0]);
+                        if (cmd.length != 1)
+                            message = "No variable expected, got "+(cmd.length-1)+" variables";
+                        else
+                            message = tree.fulltree(current_directory, 0);
+                        System.out.println(message);
                         break;
 
                     case "ls":

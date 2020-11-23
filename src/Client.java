@@ -57,13 +57,19 @@ public class Client{
 					case "tree":
 						out.println(cmd);
 						message = in.readLine();
-						System.out.println(message);
+						while(!message.equals("end_of_tree")){
+							System.out.println(message);
+							message = in.readLine();
+						}
 						break;
 
 					case "fulltree":
 						out.println(cmd);
 						message = in.readLine();
-						System.out.println(message);
+						while(!message.equals("end_of_full_tree")){
+							System.out.println(message);
+							message = in.readLine();
+						}
 						break;
 
 					case "ls":

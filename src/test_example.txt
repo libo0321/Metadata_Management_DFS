@@ -1,0 +1,24 @@
+mkdir d1
+mkdir d2
+touch f1
+cd d1
+mkdir d1.1
+mkdir d1.2
+touch f1.1
+cd d1.1
+mkdir d1.1.1
+touch f1.1.1
+cd ..
+cd ..
+tree
+fulltree
+ls
+rm f1
+rmdir d1
+ls
+cd d1
+ls
+rmdir f1.1
+ls
+
+

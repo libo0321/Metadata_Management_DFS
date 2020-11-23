@@ -32,8 +32,14 @@ public class FileTree {
         return tree.containsKey(current+name+"/");
     }
 
-    public boolean has_directory(String abs_path){
-        return tree.containsKey(abs_path);
+    public boolean is_parent_directory(String abs_path){
+        int count = 0;
+        for (String key : tree.keySet()){
+            if (key.startsWith(abs_path))
+                count++;
+
+        }
+        return count!=1;
     }
 
     public boolean has_file(String current, String name){
@@ -58,11 +64,54 @@ public class FileTree {
         int length = current.length();
         StringBuilder message = new StringBuilder();
         for (String key : tree.keySet())
-            if (key.contains(current)) {
-                message.append(key.substring(length));
-                message.append("   ");
+            if (key.startsWith(current)) {
+                int key_length = key.length();
+                if(key_length>length&&!key.substring(length,key_length-1).contains("/")) {
+                    message.append(key.substring(length));
+                    message.append("   ");
+                }
             }
         return message.toString();
+    }
+
+    public String tree(String current, int iter){
+        StringBuilder target = new StringBuilder();
+        String b = "----";
+        int length = current.length();
+        for (String key : tree.keySet())
+            if (key.startsWith(current)) {
+                int key_length = key.length();
+                if(key_length>length&&!key.substring(length,key_length-1).contains("/")){
+
+                    target.append(b.repeat(iter)).append(key.substring(length)).append('\n');
+                    if (key.charAt(key_length-1)=='/')
+                        target.append(tree(key, iter + 1));
+
+                }
+            }
+        if (iter==0)
+            target.append("end_of_tree");
+        return target.toString();
+    }
+
+    public String fulltree(String current, int iter){
+        StringBuilder target = new StringBuilder();
+        String b = "----";
+        int length = current.length();
+        for (String key : tree.keySet())
+            if (key.startsWith(current)) {
+                int key_length = key.length();
+                if(key_length>length&&!key.substring(length,key_length-1).contains("/")){
+
+                    target.append(b.repeat(iter)).append(key).append('\n');
+                    if (key.charAt(key_length-1)=='/')
+                        target.append(fulltree(key, iter + 1));
+
+                }
+            }
+        if (iter==0)
+            target.append("end_of_full_tree");
+        return target.toString();
     }
 
     public void print() {
