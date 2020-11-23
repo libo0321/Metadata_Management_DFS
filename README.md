@@ -1,4 +1,6 @@
 # Metadata_Management_DFS
+
+## If you use IDE
 Launch all Subservers
 
 Launch Cluster Server
@@ -6,6 +8,8 @@ Launch Cluster Server
 Launch Client
 
 Then you can enter commands in Client.
+
+## If you don't have IDE
 
 Files compiled can be found in "outs"
 
