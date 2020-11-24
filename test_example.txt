@@ -1,0 +1,25 @@
+mkdir d1
+mkdir d2
+touch f1
+cd d1
+mkdir d1.1
+mkdir d1.2
+touch f1.1
+cd d1.1
+mkdir d1.1.1
+touch f1.1.1
+cd ..
+cd ..
+tree
+fulltree
+cd d1/d1.1
+ls
+stat f1.1.1
+chmod f1.1.1 -w
+stat f1.1.1
+rm f1.1.1
+ls
+rm f1.1.1
+exit
+
+
