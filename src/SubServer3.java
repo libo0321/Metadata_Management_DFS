@@ -23,9 +23,6 @@ public class SubServer3 {
                 PrintWriter writer = new PrintWriter(new OutputStreamWriter(s.getOutputStream()));
                 String[] cmd = br.readLine().split(" ");
                 switch (cmd[0]) {
-                    case "chkdist":
-                        System.out.println(cmd[0]);
-                        break;
 
                     case "mkdir":
                         Folder folder = new Folder(cmd[1]);

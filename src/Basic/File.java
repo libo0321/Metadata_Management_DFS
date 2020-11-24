@@ -32,7 +32,7 @@ public class File extends BasicClass{
 
     @Override
     public String toString() {
-        return "id: "+id+"   path: "+path+"    type: "+type.toString()+
+        return "    type: "+type.toString()+
                 "    permission: "+getMod();
     }
 

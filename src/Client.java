@@ -18,37 +18,22 @@ public class Client{
 			while (true) {
 				cmd = br.readLine();
 				switch (cmd.split(" ")[0]) {
-					case "chkdist":
-						out.println(cmd);
-						message = in.readLine();
-						System.out.println(message);
-						break;
 
 					case "mkdir":
-						out.println(cmd);
-						message = in.readLine();
-						System.out.println(message);
-						break;
 
 					case "touch":
-						out.println(cmd);
-						message = in.readLine();
-						System.out.println(message);
-						break;
 
 					case "rmdir":
-						out.println(cmd);
-						message = in.readLine();
-						System.out.println(message);
-						break;
 
 					case "rm":
-						out.println(cmd);
-						message = in.readLine();
-						System.out.println(message);
-						break;
 
 					case "chmod":
+
+					case "ls":
+
+					case "stat":
+
+					case "cd":
 						out.println(cmd);
 						message = in.readLine();
 						System.out.println(message);
@@ -70,24 +55,6 @@ public class Client{
 							System.out.println(message);
 							message = in.readLine();
 						}
-						break;
-
-					case "ls":
-						out.println(cmd);
-						message = in.readLine();
-						System.out.println(message);
-						break;
-
-					case "stat":
-						out.println(cmd);
-						message = in.readLine();
-						System.out.println(message);
-						break;
-
-					case "cd":
-						out.println(cmd);
-						message = in.readLine();
-						System.out.println(message);
 						break;
 
 					case "exit":

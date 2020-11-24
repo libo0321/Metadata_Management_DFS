@@ -24,14 +24,10 @@ public class SubServer1 {
                 PrintWriter writer = new PrintWriter(new OutputStreamWriter(s.getOutputStream()));
                 String[] cmd = br.readLine().split(" ");
                 switch (cmd[0]) {
-                    case "chkdist":
-                        System.out.println(cmd[0]);
-                        break;
 
                     case "mkdir":
                         Folder folder = new Folder(cmd[1]);
                         datas.put(Integer.parseInt(cmd[1]),folder);
-                        System.out.println(message);
                         break;
 
                     case "touch":

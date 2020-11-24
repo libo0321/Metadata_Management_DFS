@@ -3,9 +3,8 @@ import java.net.*;
 import Basic.Folder;
 import Basic.File;
 
-import javax.swing.table.TableStringConverter;
-import java.util.ArrayList;
-import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class Server {
     public static void main(String[] args) {
@@ -46,9 +45,6 @@ public class Server {
                 PrintWriter writer = new PrintWriter(new OutputStreamWriter(s.getOutputStream()));
                 String[] cmd = br.readLine().split(" ");
                 switch (cmd[0]) {
-                    case "chkdist":
-                        System.out.println(cmd[0]);
-                        break;
 
                     case "mkdir":
                         if (cmd.length != 2)
@@ -62,8 +58,10 @@ public class Server {
                                 String abs_path = current_directory+cmd[1]+"/";
                                 String cmd_reconstructed = cmd[0]+" "+id;  // 给subserver的是id
                                 outs[server_id].println(cmd_reconstructed);
+                                System.out.println(cmd_reconstructed);
                                 tree.createNew(abs_path, id);
                                 message = "Directory " + cmd[1] + "/ created in current directory";
+                                ins[server_id].readLine();
                             }
                         }
                         System.out.println(message);
@@ -78,11 +76,12 @@ public class Server {
                             } else {
                                 id++;
                                 int server_id = (id-1)%3;
-                                String abs_path = current_directory+cmd[1];
+                                String abs_path = current_directory + cmd[1];
                                 String cmd_reconstructed = cmd[0]+" "+id;
                                 outs[server_id].println(cmd_reconstructed);
                                 tree.createNew(abs_path, id);
                                 message = "File " + cmd[1] + " created in current directory";
+                                ins[server_id].readLine();
                             }
                         }
                         System.out.println(message);
@@ -104,6 +103,7 @@ public class Server {
                                     outs[server_id].println(cmd_reconstructed);
                                     tree.rm_dir(current_directory, cmd[1]);
                                     message = "Directory removed";
+                                    ins[server_id].readLine();
                                 }
                             }
                             else
@@ -124,6 +124,7 @@ public class Server {
                                 outs[server_id].println(cmd_reconstructed);
                                 tree.rm(current_directory, cmd[1]);
                                 message = "File removed";
+                                ins[server_id].readLine();
                             }
                             else
                                 message = "File doesn't exist";
@@ -141,7 +142,11 @@ public class Server {
                                 String cmd_reconstructed = cmd[0]+" "+id_item+" "+cmd[2];
                                 outs[server_id].println(cmd_reconstructed);
                                 message = "File " + cmd[1] + " changed mode";
+                                ins[server_id].readLine();
                             }
+                            else
+                                message = "File "+cmd[1]+" doesn't exist";
+
                         System.out.println(message);
                         break;
 
@@ -172,14 +177,22 @@ public class Server {
                     case "stat":
                         if (cmd.length != 2)
                             message = "Name of file of directory expected, got "+(cmd.length-1)+" variables";
-                        else
-                        if(tree.has_file(current_directory, cmd[1])){
-                            String abs_path = current_directory+cmd[1];
-                            int id_item = tree.getIdByPath(abs_path);
-                            int server_id = (id_item-1)%3;
-                            String cmd_reconstructed = cmd[0]+" "+id_item;
-                            outs[server_id].println(cmd_reconstructed);
-                            message = ins[server_id].readLine();
+                        else {
+                            String abs_path = "";
+                            if (tree.has_directory(current_directory, cmd[1]))
+                                abs_path = current_directory + cmd[1] + "/";
+                            if (tree.has_file(current_directory, cmd[1]))
+                                abs_path = current_directory + cmd[1];
+                            if (abs_path.equals(""))
+                                message = "File or directory " + cmd[1] + " doesn't exist";
+                            else{
+                                int id_item = tree.getIdByPath(abs_path);
+                                int server_id = (id_item - 1) % 3;
+                                String cmd_reconstructed = cmd[0] + " " + id_item;
+                                outs[server_id].println(cmd_reconstructed);
+                                System.out.println(cmd_reconstructed);
+                                message = "id: "+id_item+"    path: "+abs_path + ins[server_id].readLine();
+                            }
                         }
                         System.out.println(message);
                         break;

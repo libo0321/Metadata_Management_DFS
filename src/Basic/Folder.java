@@ -9,6 +9,6 @@ public class Folder extends BasicClass{
 
     @Override
     public String toString() {
-        return "id: "+id+"   path: "+path+"    type: "+type.toString();
+        return "    type: "+type.toString();
     }
 }
