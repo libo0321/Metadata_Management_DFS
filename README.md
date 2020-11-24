@@ -30,3 +30,6 @@ java SubServer3
 java Server
 java Client
 ```
+
+## Test
+You can try commands in file "test_example.txt"
