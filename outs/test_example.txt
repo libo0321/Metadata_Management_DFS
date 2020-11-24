@@ -12,7 +12,6 @@ cd ..
 cd ..
 tree
 fulltree
-rmdir d1
 cd d1/d1.1
 ls
 stat f1.1.1

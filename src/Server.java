@@ -191,7 +191,8 @@ public class Server {
                                 String cmd_reconstructed = cmd[0] + " " + id_item;
                                 outs[server_id].println(cmd_reconstructed);
                                 System.out.println(cmd_reconstructed);
-                                message = "id: "+id_item+"    path: "+abs_path + ins[server_id].readLine();
+                                message = "id: "+id_item+"    path: "+abs_path + ins[server_id].readLine()+"\n"
+                                + "metadata server: ds"+(server_id+1);
                             }
                         }
                         System.out.println(message);

@@ -31,10 +31,16 @@ public class Client{
 
 					case "ls":
 
-					case "stat":
-
 					case "cd":
 						out.println(cmd);
+						message = in.readLine();
+						System.out.println(message);
+						break;
+
+					case "stat":
+						out.println(cmd);
+						message = in.readLine();
+						System.out.println(message);
 						message = in.readLine();
 						System.out.println(message);
 						break;

@@ -25,4 +25,5 @@ public abstract class BasicClass {
 
     @Override
     public abstract String toString();
+
 }
